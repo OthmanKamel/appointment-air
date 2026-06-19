@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Terms and Conditions | Appointment Air by Othman Kamel</title>
+  <title>Terms and Conditions | Appointment Air</title>
   <meta
     name="description"
     content="Terms and Conditions for Appointment Air by Othman Kamel."
@@ -63,17 +63,21 @@
     }
 
     .brand {
-      color: var(--white);
-      font-weight: 800;
       display: flex;
       flex-direction: column;
       line-height: 1.2;
+      color: var(--white);
     }
 
-    .brand small {
+    .brand strong {
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .brand span {
       color: var(--muted);
-      font-weight: 500;
       font-size: 13px;
+      font-weight: 500;
     }
 
     .links {
@@ -155,12 +159,13 @@
   <header>
     <div class="container nav">
       <a class="brand" href="index.html">
-        <span>Appointment Air</span>
-        <small>by Othman Kamel</small>
+        <strong>Appointment Air</strong>
+        <span>by Othman Kamel</span>
       </a>
 
       <nav class="links" aria-label="Main navigation">
         <a href="index.html">Home</a>
+        <a href="sms-consent.html">Opt in</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </nav>
@@ -171,7 +176,7 @@
     <div class="container">
       <article class="card">
         <h1>Terms and Conditions</h1>
-        <p class="updated">Last updated: June 16, 2026</p>
+        <p class="updated">Last updated: June 18, 2026</p>
 
         <p>
           These Terms and Conditions (“Terms”) apply to Appointment Air by Othman Kamel (“Appointment Air,” “we,”
@@ -182,9 +187,9 @@
         <h2>1. Service description</h2>
 
         <p>
-          Appointment Air helps appointment-based businesses send and manage appointment-related communications,
-          including reminders, confirmations, rescheduling instructions, reschedule confirmations, and earlier-slot
-          availability notifications.
+          Appointment Air helps appointment-based businesses, providers, and clinics send and manage appointment-
+          related communications, including reminders, confirmations, rescheduling instructions, reschedule
+          confirmations, and earlier appointment availability notifications.
         </p>
 
         <p>
@@ -202,7 +207,7 @@
 
           <p>
             <strong>Program description:</strong> Appointment reminder and scheduling text messages for
-            appointment-based businesses.
+            appointment-based businesses, providers, and clinics.
           </p>
 
           <p>
@@ -219,10 +224,14 @@
         </div>
 
         <p>
-          By providing a phone number to a business that uses Appointment Air and agreeing to receive appointment
-          reminder and scheduling messages, recipients may receive SMS messages related to appointments. These
-          messages may include appointment reminders, confirmation requests, rescheduling instructions, reschedule
-          confirmations, and earlier-slot notifications.
+          Customers may opt in to SMS appointment reminders through an Appointment Air opt-in page provided by the
+          business, provider, or clinic where the appointment is booked. These messages may include appointment
+          reminders, confirmation requests, rescheduling instructions, reschedule confirmations, and earlier
+          appointment availability notifications.
+        </p>
+
+        <p>
+          For security, the business may send a final confirmation email soon before SMS reminders are enabled.
         </p>
 
         <h2>3. Opt-out and help instructions</h2>
@@ -230,7 +239,7 @@
         <p>
           Recipients can reply <strong>STOP</strong> to opt out of SMS messages. After opting out, the recipient
           should no longer receive SMS messages from that Appointment Air messaging program unless they opt in again
-          or otherwise provide new consent through the business.
+          or otherwise provide new valid consent.
         </p>
 
         <p>
@@ -238,30 +247,25 @@
           contact the business where the appointment was booked.
         </p>
 
-        <h2>4. Consent responsibility</h2>
+        <h2>4. SMS opt-in</h2>
 
         <p>
-          Businesses using Appointment Air are responsible for collecting phone numbers lawfully and obtaining any
-          required consent before entering or importing a recipient’s number into Appointment Air. Businesses should
-          inform recipients that they may receive appointment reminder and scheduling text messages using Appointment
-          Air.
+          Appointment Air provides an SMS opt-in workflow that businesses, providers, and clinics can direct customers
+          to before appointment reminder text messages are enabled. The opt-in workflow asks for the business name,
+          customer contact details, appointment information, email for final confirmation, and optional SMS consent.
         </p>
 
         <p>
-          Suggested consent language for businesses using Appointment Air:
-        </p>
-
-        <p>
-          “By providing your phone number, you agree to receive appointment reminder and scheduling text messages
-          from [BusinessName] using Appointment Air. Message frequency varies. Message and data rates may apply.
-          Reply HELP for help or STOP to opt out.”
+          SMS consent is optional and unchecked by default. Customers should not receive Appointment Air SMS messages
+          unless they have opted in or otherwise provided valid consent. Customers can reply <strong>STOP</strong> to
+          opt out or <strong>HELP</strong> for help.
         </p>
 
         <h2>5. Business-side use</h2>
 
         <p>
-          Businesses are responsible for the accuracy of appointment information entered into Appointment Air,
-          including customer names, contact details, appointment dates and times, and follow-up notes.
+          Businesses, providers, and clinics are responsible for using Appointment Air only for appointment-related
+          communication, entering accurate appointment information, and respecting customer SMS consent choices.
         </p>
 
         <p>
@@ -317,6 +321,7 @@
     <div class="container">
       © 2026 Appointment Air by Othman Kamel ·
       <a href="index.html">Home</a> ·
+      <a href="sms-consent.html">SMS Opt-In</a> ·
       <a href="privacy.html">Privacy Policy</a>
     </div>
   </footer>

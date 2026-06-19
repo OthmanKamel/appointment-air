@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SMS Opt-In | Appointment Air</title>
+  <meta
+    name="description"
+    content="Opt in to appointment reminder and scheduling text messages through Appointment Air by Othman Kamel."
+  />
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #11182c;
+      --panel-soft: #172039;
+      --text: #f5f7fb;
+      --muted: #b8c1d9;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #72e0ff;
+      --accent-2: #9cf2c6;
+      --white: #ffffff;
+      --danger: #ff8a8a;
+      --success: #9cf2c6;
+      --warning: #ffd38a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(114, 224, 255, 0.15), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11, 16, 32, 0.75);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      color: var(--white);
+    }
+
+    .brand strong {
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .links a {
+      color: var(--muted);
+    }
+
+    .links a:hover {
+      color: var(--white);
+    }
+
+    main {
+      padding: 60px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: clamp(24px, 5vw, 48px);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+      margin: 0 0 14px;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      margin-top: 34px;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    ul,
+    ol {
+      padding-left: 22px;
+    }
+
+    .important {
+      border: 1px solid rgba(156, 242, 198, 0.55);
+      background:
+        radial-gradient(circle at top right, rgba(156, 242, 198, 0.24), transparent 18rem),
+        rgba(156, 242, 198, 0.12);
+      border-radius: 20px;
+      padding: 18px;
+      margin: 22px 0;
+    }
+
+    .important p {
+      margin: 0;
+    }
+
+    .form-panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 24px;
+      margin-top: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-row {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="datetime-local"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+      background: var(--panel-soft);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: rgba(184, 193, 217, 0.55);
+    }
+
+    input:focus {
+      border-color: rgba(114, 224, 255, 0.75);
+      box-shadow: 0 0 0 4px rgba(114, 224, 255, 0.10);
+    }
+
+    input.invalid {
+      border-color: rgba(255, 138, 138, 0.95);
+      box-shadow: 0 0 0 4px rgba(255, 138, 138, 0.12);
+    }
+
+    .checkbox-row {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid rgba(114, 224, 255, 0.55);
+      background:
+        radial-gradient(circle at top right, rgba(114, 224, 255, 0.25), transparent 18rem),
+        rgba(114, 224, 255, 0.12);
+      border-radius: 18px;
+      margin-top: 12px;
+    }
+
+    .checkbox-row input {
+      margin-top: 5px;
+      accent-color: #72e0ff;
+    }
+
+    .checkbox-row p {
+      margin: 0;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 800;
+      border: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #06101a;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .small-print {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 18px;
+    }
+
+    .result {
+      display: none;
+      border-radius: 20px;
+      padding: 18px;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .result.success {
+      display: block;
+      border-color: rgba(156, 242, 198, 0.72);
+      background:
+        radial-gradient(circle at top right, rgba(156, 242, 198, 0.30), transparent 18rem),
+        rgba(156, 242, 198, 0.14);
+    }
+
+    .result.error {
+      display: block;
+      border-color: rgba(255, 138, 138, 0.72);
+      background:
+        radial-gradient(circle at top right, rgba(255, 138, 138, 0.28), transparent 18rem),
+        rgba(255, 138, 138, 0.13);
+    }
+
+    .result.warning {
+      display: block;
+      border-color: rgba(255, 211, 138, 0.76);
+      background:
+        radial-gradient(circle at top right, rgba(255, 211, 138, 0.30), transparent 18rem),
+        rgba(255, 211, 138, 0.13);
+    }
+
+    .result p {
+      margin: 0 0 8px;
+    }
+
+    .result-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--text);
+      font-weight: 850;
+    }
+
+    .result-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .confirmation-box {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(7, 16, 31, 0.52);
+      border-radius: 18px;
+      padding: 16px;
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .confirmation-box p {
+      margin: 0 0 7px;
+    }
+
+    .security-note {
+      border: 1px solid rgba(114, 224, 255, 0.65);
+      background:
+        radial-gradient(circle at top right, rgba(114, 224, 255, 0.28), transparent 16rem),
+        rgba(114, 224, 255, 0.14);
+      border-radius: 18px;
+      padding: 16px;
+      margin: 12px 0;
+      color: var(--text);
+    }
+
+    .security-note p {
+      margin-bottom: 6px;
+    }
+
+    footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <strong>Appointment Air</strong>
+        <span>by Othman Kamel</span>
+      </a>
+
+      <nav class="links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="sms-consent.html">Opt in</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="card">
+        <div class="eyebrow">SMS appointment reminder consent</div>
+
+        <h1>Opt in to appointment text messages</h1>
+
+        <p>
+          Use this page to opt in to appointment reminder and scheduling text messages from a business, provider,
+          or clinic using Appointment Air by Othman Kamel.
+        </p>
+
+        <p>
+          Text message consent is optional. You can still manage your appointment directly with the business if you
+          do not want text reminders. You can reply <strong>STOP</strong> to opt out at any time or
+          <strong>HELP</strong> for help.
+        </p>
+
+        <div class="important">
+          <p>
+            <strong>What messages are for:</strong> appointment reminders, confirmations, rescheduling instructions,
+            reschedule confirmations, and earlier appointment availability notifications. Message frequency varies
+            based on appointment activity. Message and data rates may apply.
+          </p>
+        </div>
+
+        <h2>SMS opt-in form</h2>
+
+        <div class="form-panel" aria-label="SMS opt-in form">
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="business-name">Business / provider / clinic name</label>
+              <input id="business-name" type="text" placeholder="Example: Aram Clinic" autocomplete="organization" />
+            </div>
+
+            <div class="form-row">
+              <label for="customer-name">Your name</label>
+              <input id="customer-name" type="text" placeholder="Example: Alex Jones" autocomplete="name" />
+            </div>
+
+            <div class="form-row">
+              <label for="customer-phone">Your mobile phone number</label>
+              <input id="customer-phone" type="tel" placeholder="Example: +13055551234" autocomplete="tel" />
+            </div>
+
+            <div class="form-row">
+              <label for="customer-email">Your email for final confirmation</label>
+              <input id="customer-email" type="email" placeholder="Example: alex@example.com" autocomplete="email" />
+            </div>
+
+            <div class="form-row">
+              <label for="appointment-time">Appointment date and time</label>
+              <input id="appointment-time" type="datetime-local" />
+            </div>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="sms-consent" type="checkbox" />
+            <p>
+              <strong>Optional SMS consent:</strong> I agree to receive appointment reminder and scheduling text
+              messages from the business, provider, or clinic named above using Appointment Air by Othman Kamel.
+              Message frequency varies based on appointment activity. Message and data rates may apply. Reply
+              HELP for help or STOP to opt out.
+            </p>
+          </div>
+
+          <div class="button-row">
+            <button class="button" type="button" id="submit-consent">Submit SMS opt-in</button>
+            <button class="button secondary" type="button" id="clear-form">Clear form</button>
+          </div>
+
+          <div id="result" class="result" aria-live="polite"></div>
+
+          <p class="small-print">
+            This page confirms SMS opt-in details for Appointment Air. For your security, the business may send a
+            final confirmation email soon before SMS reminders are enabled.
+          </p>
+        </div>
+
+        <h2>Privacy and terms</h2>
+
+        <p>
+          Read the <a href="privacy.html">Privacy Policy</a> and
+          <a href="terms.html">Terms and Conditions</a> for more information about Appointment Air’s SMS messaging
+          program.
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Appointment Air by Othman Kamel ·
+      <a href="index.html">Home</a> ·
+      <a href="sms-consent.html">SMS Opt-In</a> ·
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="terms.html">Terms and Conditions</a>
+    </div>
+  </footer>
+
+  <script>
+    const form = {
+      businessName: document.getElementById('business-name'),
+      customerName: document.getElementById('customer-name'),
+      phone: document.getElementById('customer-phone'),
+      email: document.getElementById('customer-email'),
+      appointmentTime: document.getElementById('appointment-time'),
+      consent: document.getElementById('sms-consent'),
+      button: document.getElementById('submit-consent'),
+      clearButton: document.getElementById('clear-form'),
+      result: document.getElementById('result')
+    };
+
+    function showResult(type, html) {
+      form.result.className = 'result ' + type;
+      form.result.innerHTML = html;
+      form.result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function markInvalid(input, isInvalid) {
+      if (isInvalid) {
+        input.classList.add('invalid');
+      } else {
+        input.classList.remove('invalid');
+      }
+    }
+
+    function getValue(input) {
+      return String(input.value || '').trim();
+    }
+
+    function isValidPhone(value) {
+      const cleaned = String(value || '').trim();
+      const digits = cleaned.replace(/[^\d]/g, '');
+
+      return digits.length >= 10 && digits.length <= 15;
+    }
+
+    function isValidEmail(value) {
+      const cleaned = String(value || '').trim();
+
+      if (!cleaned) return false;
+
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cleaned);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function formatAppointment(value) {
+      if (!value) return '';
+
+      const date = new Date(value);
+
+      if (Number.isNaN(date.getTime())) {
+        return value;
+      }
+
+      return new Intl.DateTimeFormat('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(date);
+    }
+
+    function buildConsentRecord(data) {
+      const now = new Date();
+
+      return {
+        businessName: data.businessName,
+        customerName: data.customerName,
+        phone: data.phone,
+        email: data.email,
+        appointmentTime: data.appointmentTime,
+        submittedAt: now.toISOString(),
+        smsConsentReceived: true,
+        finalEmailConfirmationStatus: 'may be sent soon',
+        consentLanguage:
+          'I agree to receive appointment reminder and scheduling text messages from the business, provider, or clinic named above using Appointment Air by Othman Kamel. Message frequency varies based on appointment activity. Message and data rates may apply. Reply HELP for help or STOP to opt out.'
+      };
+    }
+
+    function downloadConsentRecord(record) {
+      const blob = new Blob([JSON.stringify(record, null, 2)], {
+        type: 'application/json'
+      });
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+
+      const safeName = record.customerName
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '') || 'customer';
+
+      a.href = url;
+      a.download = 'appointment-air-sms-consent-' + safeName + '.json';
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    form.button.addEventListener('click', function () {
+      const businessName = getValue(form.businessName);
+      const customerName = getValue(form.customerName);
+      const phone = getValue(form.phone);
+      const email = getValue(form.email);
+      const appointmentTime = getValue(form.appointmentTime);
+
+      const missingBusiness = !businessName;
+      const missingCustomer = !customerName;
+      const badPhone = !isValidPhone(phone);
+      const badEmail = !isValidEmail(email);
+      const missingAppointment = !appointmentTime;
+
+      markInvalid(form.businessName, missingBusiness);
+      markInvalid(form.customerName, missingCustomer);
+      markInvalid(form.phone, badPhone);
+      markInvalid(form.email, badEmail);
+      markInvalid(form.appointmentTime, missingAppointment);
+
+      const errors = [];
+
+      if (missingBusiness) errors.push('Enter the business, provider, or clinic name.');
+      if (missingCustomer) errors.push('Enter your name.');
+      if (badPhone) errors.push('Enter a valid mobile phone number.');
+      if (badEmail) errors.push('Enter a valid email address for final confirmation.');
+      if (missingAppointment) errors.push('Enter the appointment date and time.');
+
+      if (errors.length > 0) {
+        showResult(
+          'error',
+          '<p class="result-title"><span class="result-icon">!</span>Some information needs to be fixed.</p>' +
+          '<p>Please correct the highlighted fields before submitting SMS opt-in.</p>' +
+          '<ul>' + errors.map(error => '<li>' + error + '</li>').join('') + '</ul>'
+        );
+        return;
+      }
+
+      if (!form.consent.checked) {
+        showResult(
+          'warning',
+          '<p class="result-title"><span class="result-icon">•</span>SMS opt-in was not submitted.</p>' +
+          '<p>You did not check the optional SMS consent box. You should not receive appointment reminder text messages through Appointment Air unless you opt in later or give valid consent through another approved method.</p>'
+        );
+        return;
+      }
+
+      const record = buildConsentRecord({
+        businessName,
+        customerName,
+        phone,
+        email,
+        appointmentTime: formatAppointment(appointmentTime)
+      });
+
+      showResult(
+        'success',
+        '<p class="result-title"><span class="result-icon">✓</span>SMS opt-in received.</p>' +
+        '<p>You agreed to receive appointment reminder and scheduling text messages from <strong>' + escapeHtml(businessName) + '</strong> using Appointment Air by Othman Kamel.</p>' +
+        '<div class="security-note">' +
+          '<p><strong>For your security, the business may send a final confirmation email to you soon before SMS reminders are enabled.</strong></p>' +
+          '<p>Please check the email address you provided for any follow-up confirmation.</p>' +
+        '</div>' +
+        '<div class="confirmation-box">' +
+          '<p><strong>Name:</strong> ' + escapeHtml(customerName) + '</p>' +
+          '<p><strong>Mobile phone:</strong> ' + escapeHtml(phone) + '</p>' +
+          '<p><strong>Confirmation email:</strong> ' + escapeHtml(email) + '</p>' +
+          '<p><strong>Appointment:</strong> ' + escapeHtml(formatAppointment(appointmentTime)) + '</p>' +
+          '<p><strong>SMS opt-in:</strong> received</p>' +
+        '</div>' +
+        '<p>You can reply <strong>STOP</strong> to opt out at any time or <strong>HELP</strong> for help.</p>' +
+        '<p><button class="button secondary" type="button" id="download-consent">Download consent record</button></p>'
+      );
+
+      const downloadButton = document.getElementById('download-consent');
+
+      if (downloadButton) {
+        downloadButton.addEventListener('click', function () {
+          downloadConsentRecord(record);
+        });
+      }
+    });
+
+    form.clearButton.addEventListener('click', function () {
+      form.businessName.value = '';
+      form.customerName.value = '';
+      form.phone.value = '';
+      form.email.value = '';
+      form.appointmentTime.value = '';
+      form.consent.checked = false;
+
+      markInvalid(form.businessName, false);
+      markInvalid(form.customerName, false);
+      markInvalid(form.phone, false);
+      markInvalid(form.email, false);
+      markInvalid(form.appointmentTime, false);
+
+      form.result.className = 'result';
+      form.result.innerHTML = '';
+    });
+  </script>
+</body>
+</html>

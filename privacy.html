@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Privacy Policy | Appointment Air by Othman Kamel</title>
+  <title>Privacy Policy | Appointment Air</title>
   <meta
     name="description"
     content="Privacy Policy for Appointment Air by Othman Kamel."
@@ -63,17 +63,21 @@
     }
 
     .brand {
-      color: var(--white);
-      font-weight: 800;
       display: flex;
       flex-direction: column;
       line-height: 1.2;
+      color: var(--white);
     }
 
-    .brand small {
+    .brand strong {
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .brand span {
       color: var(--muted);
-      font-weight: 500;
       font-size: 13px;
+      font-weight: 500;
     }
 
     .links {
@@ -155,12 +159,13 @@
   <header>
     <div class="container nav">
       <a class="brand" href="index.html">
-        <span>Appointment Air</span>
-        <small>by Othman Kamel</small>
+        <strong>Appointment Air</strong>
+        <span>by Othman Kamel</span>
       </a>
-
+      
       <nav class="links" aria-label="Main navigation">
         <a href="index.html">Home</a>
+        <a href="sms-consent.html">Opt in</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </nav>
@@ -171,7 +176,7 @@
     <div class="container">
       <article class="card">
         <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: June 16, 2026</p>
+        <p class="updated">Last updated: June 18, 2026</p>
 
         <p>
           This Privacy Policy explains how Appointment Air by Othman Kamel (“Appointment Air,” “we,” “us,” or “our”)
@@ -179,9 +184,9 @@
         </p>
 
         <p>
-          Appointment Air is an information technology service used by appointment-based businesses to send
-          appointment reminders, confirmations, rescheduling instructions, and earlier-slot notifications to people
-          who provided their contact information to that business.
+          Appointment Air is an information technology service used by appointment-based businesses, providers, and
+          clinics to send appointment reminders, confirmations, rescheduling instructions, and earlier appointment
+          availability notifications to customers who opt in to receive those messages.
         </p>
 
         <div class="important">
@@ -199,12 +204,15 @@
         </p>
 
         <ul>
-          <li>Customer or patient name, when provided by the business;</li>
-          <li>Phone number and, if used, email address;</li>
+          <li>Customer or patient name, when provided;</li>
+          <li>Business, provider, or clinic name;</li>
+          <li>Mobile phone number and email address;</li>
           <li>Appointment date and time;</li>
+          <li>SMS consent status and opt-in information;</li>
+          <li>Final email confirmation status, when used;</li>
           <li>Appointment confirmation, rescheduling, and response status;</li>
           <li>Message delivery information, such as timestamps and response keywords;</li>
-          <li>Business name and appointment-related notes entered by the business.</li>
+          <li>Appointment-related notes needed by the business using Appointment Air.</li>
         </ul>
 
         <p>
@@ -220,6 +228,8 @@
         </p>
 
         <ul>
+          <li>Recording SMS opt-in choices;</li>
+          <li>Supporting final confirmation by email when used;</li>
           <li>Sending appointment reminders;</li>
           <li>Receiving appointment confirmations;</li>
           <li>Supporting rescheduling requests;</li>
@@ -231,13 +241,15 @@
         <h2>3. SMS consent and opt-out</h2>
 
         <p>
-          Customers provide their phone number when booking, completing intake, or managing an appointment with a
-          business that uses Appointment Air. The business is responsible for informing the customer that they may
-          receive appointment reminder and scheduling text messages using Appointment Air and for confirming consent
-          before entering or importing the phone number into Appointment Air.
+          Customers may opt in to appointment reminder and scheduling text messages through an Appointment Air opt-in
+          page provided by the business, provider, or clinic where the appointment is booked. The opt-in page asks
+          for the business name, customer contact details, appointment information, email for final confirmation,
+          and optional SMS consent.
         </p>
 
         <p>
+          SMS consent is optional and must be affirmative. Customers can choose not to receive SMS appointment
+          reminders. For security, the business may send a final confirmation email before SMS reminders are enabled.
           Message frequency varies based on appointment activity. Message and data rates may apply. Recipients can
           reply <strong>STOP</strong> to opt out of SMS messages. Recipients can reply <strong>HELP</strong> for help.
         </p>
@@ -251,8 +263,8 @@
 
         <p>
           We may share or process information only as needed to operate the service, such as with communication,
-          hosting, database, or infrastructure providers that help deliver Appointment Air. These providers are used
-          for operational purposes, not for selling or marketing mobile consent information.
+          hosting, database, messaging, voice, email, or infrastructure providers that help deliver Appointment Air.
+          These providers are used for operational purposes, not for selling or marketing mobile consent information.
         </p>
 
         <h2>5. Data retention</h2>
@@ -274,9 +286,14 @@
         <h2>7. Business responsibility</h2>
 
         <p>
-          Appointment Air is a software service. Businesses using Appointment Air are responsible for collecting
-          customer contact information lawfully, obtaining any required consent, entering accurate appointment
-          information, and responding to customer requests that require human follow-up.
+          Appointment Air is a software service. Businesses, providers, and clinics using Appointment Air are
+          responsible for directing customers to the correct opt-in workflow, entering accurate appointment
+          information, and responding to appointment questions that require human follow-up.
+        </p>
+
+        <p>
+          Businesses should not use Appointment Air to send SMS messages to customers who have not opted in or
+          otherwise provided valid SMS consent.
         </p>
 
         <h2>8. Children</h2>
@@ -308,6 +325,7 @@
     <div class="container">
       © 2026 Appointment Air by Othman Kamel ·
       <a href="index.html">Home</a> ·
+      <a href="sms-consent.html">SMS Opt-In</a> ·
       <a href="terms.html">Terms and Conditions</a>
     </div>
   </footer>

@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Appointment Air by Othman Kamel</title>
   <meta
     name="description"
-    content="Appointment Air is an appointment reminder and scheduling automation service for appointment-based businesses."
+    content="Appointment Air helps appointment-based businesses send appointment reminders, confirmations, rescheduling instructions, and earlier appointment availability notifications."
   />
 
   <style>
@@ -91,6 +92,7 @@
       gap: 18px;
       color: var(--muted);
       font-size: 14px;
+      flex-wrap: wrap;
     }
 
     .nav-links a:hover {
@@ -132,7 +134,7 @@
       color: var(--muted);
       max-width: 680px;
       font-size: 18px;
-      margin: 0 0 28px;
+      margin: 0 0 20px;
     }
 
     .actions {
@@ -148,7 +150,7 @@
       justify-content: center;
       border-radius: 999px;
       padding: 13px 18px;
-      font-weight: 700;
+      font-weight: 800;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.06);
       color: var(--white);
@@ -158,6 +160,10 @@
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: #06101a;
       border: none;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
     }
 
     .card {
@@ -252,6 +258,24 @@
       color: var(--muted);
     }
 
+    .cta-panel {
+      border: 1px solid rgba(114, 224, 255, 0.28);
+      background: rgba(114, 224, 255, 0.08);
+      border-radius: 28px;
+      padding: clamp(24px, 5vw, 42px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-panel p {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0;
+    }
+
     footer {
       padding: 40px 0;
       border-top: 1px solid var(--line);
@@ -298,7 +322,7 @@
 
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#how-it-works">How it works</a>
-        <a href="#consent">Consent</a>
+        <a href="sms-consent.html">Opt in</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </nav>
@@ -314,35 +338,35 @@
           <h1>Fewer missed appointments. Cleaner scheduling.</h1>
 
           <p>
-            Appointment Air is an information technology service that helps appointment-based businesses send
-            appointment reminders, confirmations, rescheduling instructions, and earlier-slot notifications by
-            SMS, voice, and related communication channels.
+            Appointment Air is an appointment reminder and scheduling automation service used by appointment-based
+            businesses, providers, and clinics to help customers confirm, reschedule, and receive appointment updates.
           </p>
 
           <p>
-            The service is designed for businesses that already collect customer contact information during
-            booking, intake, or appointment management.
+            Customers who want appointment reminder and scheduling text messages can use the Appointment Air SMS
+            opt-in page provided by the business. SMS consent is optional, and customers can reply STOP to opt out
+            at any time.
           </p>
 
           <div class="actions">
-            <a class="button primary" href="#how-it-works">See how it works</a>
+            <a class="button primary" href="sms-consent.html">Opt in for appointment texts</a>
+            <a class="button" href="#how-it-works">How it works</a>
             <a class="button" href="privacy.html">Privacy Policy</a>
-            <a class="button" href="terms.html">Terms</a>
           </div>
         </div>
 
         <aside class="card" aria-label="Message example">
           <div class="demo-phone">
             <div class="message out">
-              Hello Alex, this is Appointment Air for [Demo Business]. Your appointment is scheduled for Wednesday at
-              3:00 PM. Reply 1 to confirm or 2 to request rescheduling. Reply STOP to opt out.
+              Hello Alex, this is Appointment Air by Othman Kamel for Demo Business. Your appointment is scheduled
+              for Wednesday at 3:00 PM. Reply 1 to confirm or 2 to request rescheduling. Reply STOP to opt out.
             </div>
 
             <div class="message">1</div>
 
             <div class="message out">
-              Appointment Air for [Demo Business]: Thank you. Your appointment on Wednesday at 3:00 PM is confirmed.
-              Reply HELP for help or STOP to opt out.
+              Appointment Air by Othman Kamel for Demo Business: Thank you. Your appointment on Wednesday at
+              3:00 PM is confirmed. Reply HELP for help or STOP to opt out.
             </div>
 
             <div class="status-row">
@@ -363,31 +387,31 @@
       <div class="container">
         <h2 class="section-title">How Appointment Air works</h2>
         <p class="section-intro">
-          Appointment Air supports the operational side of appointment communication. It does not replace the
-          business relationship between the business and its customer.
+          Appointment Air supports appointment communication between a business and its customers. It is designed for
+          appointment logistics, not marketing campaigns.
         </p>
 
         <div class="grid-3">
           <div class="feature">
-            <h3>1. Business collects consent</h3>
+            <h3>1. Customer opts in</h3>
             <p>
-              The business collects the customer’s phone number and confirms permission to send appointment-related
-              SMS messages before entering or importing the number.
+              The business directs the customer to the Appointment Air SMS opt-in page. The customer enters contact
+              and appointment information and chooses whether to receive SMS reminders.
             </p>
           </div>
 
           <div class="feature">
-            <h3>2. Appointment Air sends reminders</h3>
+            <h3>2. Appointment Air sends updates</h3>
             <p>
-              Appointment Air can send reminders, confirmation prompts, rescheduling instructions, and earlier-slot
-              notifications.
+              Appointment Air can send reminders, confirmation prompts, rescheduling instructions, confirmations,
+              and earlier appointment availability notifications.
             </p>
           </div>
 
           <div class="feature">
-            <h3>3. Customer controls SMS</h3>
+            <h3>3. Customer stays in control</h3>
             <p>
-              Recipients can reply STOP to opt out of SMS messages or HELP for assistance.
+              SMS consent is optional. Recipients can reply STOP to opt out of SMS messages or HELP for assistance.
             </p>
           </div>
         </div>
@@ -396,20 +420,44 @@
 
     <section id="consent">
       <div class="container">
-        <h2 class="section-title">SMS consent model</h2>
+        <h2 class="section-title">SMS opt-in</h2>
 
         <div class="notice">
           <p>
-            Customers provide their phone number when booking or managing an appointment with a business that uses
-            Appointment Air. The business informs the customer that they may receive appointment reminder and
-            scheduling text messages sent using Appointment Air.
+            Appointment Air uses a direct opt-in workflow. A business, provider, or clinic can direct a customer to
+            the Appointment Air SMS opt-in page before SMS appointment reminders are enabled.
           </p>
 
           <p>
-            Businesses using Appointment Air should confirm SMS consent before sending messages. Recipients can reply
-            STOP to opt out at any time. Message frequency varies based on appointments. Message and data rates may
-            apply.
+            On the opt-in page, the customer enters the business name, contact details, appointment information, and
+            can choose whether to receive appointment reminder and scheduling text messages. The SMS checkbox is
+            optional and unchecked by default.
           </p>
+
+          <p>
+            Customers can reply STOP to opt out or HELP for help. Message frequency varies based on appointment
+            activity. Message and data rates may apply.
+          </p>
+
+          <p>
+            <a class="button primary" href="sms-consent.html">Go to SMS opt-in page</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <h2 class="section-title">Ready to receive appointment text reminders?</h2>
+            <p>
+              Use the SMS opt-in page when a business, provider, or clinic using Appointment Air directs you to
+              confirm your appointment communication preferences.
+            </p>
+          </div>
+
+          <a class="button primary" href="sms-consent.html">Opt in for SMS reminders</a>
         </div>
       </div>
     </section>
@@ -429,6 +477,7 @@
     <div class="container footer-row">
       <span>© 2026 Appointment Air by Othman Kamel. All rights reserved.</span>
       <span>
+        <a href="sms-consent.html">SMS Opt-In</a> ·
         <a href="privacy.html">Privacy Policy</a> ·
         <a href="terms.html">Terms and Conditions</a>
       </span>
