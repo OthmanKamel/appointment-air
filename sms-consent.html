@@ -7,7 +7,7 @@
   <title>SMS Opt-In | Appointment Air</title>
   <meta
     name="description"
-    content="Opt in to appointment reminder and scheduling text messages through Appointment Air by Othman Kamel."
+    content="Review optional SMS follow-ups for customer-initiated appointment booking and rescheduling requests through Appointment Air LLC."
   />
 
   <style>
@@ -405,26 +405,28 @@
   <main>
     <div class="container">
       <article class="card">
-        <div class="eyebrow">SMS appointment reminder consent</div>
+        <div class="eyebrow">AI-guided appointment assistance · SMS opt-in</div>
 
-        <h1>Opt in to appointment text messages</h1>
+        <h1>Opt in for appointment follow-ups</h1>
 
         <p>
-          Use this page to opt in to appointment reminder and scheduling text messages from a business, provider,
-          or clinic using Appointment Air by Othman Kamel.
+          If you have requested help booking or rescheduling an appointment through Appointment Air's
+          conversational AI assistance, this page explains how to opt in to optional SMS follow-ups
+          about your request.
         </p>
 
         <p>
-          Text message consent is optional. You can still manage your appointment directly with the business if you
-          do not want text reminders. You can reply <strong>STOP</strong> to opt out at any time or
-          <strong>HELP</strong> for help.
+          SMS opt-in is optional. You can still request voice assistance or contact the business directly
+          for appointment guidance. If you receive SMS follow-ups, reply <strong>STOP</strong> to opt out
+          or <strong>HELP</strong> for assistance.
         </p>
 
         <div class="important">
           <p>
-            <strong>What messages are for:</strong> appointment reminders, confirmations, rescheduling instructions,
-            reschedule confirmations, and earlier appointment availability notifications. Message frequency varies
-            based on appointment activity. Message and data rates may apply.
+            <strong>What follow-ups are for:</strong> responses and updates about customer-initiated requests to
+            set or reschedule an appointment, including available-time options and booking confirmations. This is
+            not a marketing program. Message frequency varies based on appointment activity. Message and data rates
+            may apply.
           </p>
         </div>
 
@@ -433,7 +435,7 @@
         <div class="form-panel" aria-label="SMS opt-in form">
           <div class="form-grid">
             <div class="form-row">
-              <label for="business-name">Business / provider / clinic name</label>
+              <label for="business-name">Business / provider name</label>
               <input id="business-name" type="text" placeholder="Example: Aram Clinic" autocomplete="organization" />
             </div>
 
@@ -461,10 +463,10 @@
           <div class="checkbox-row">
             <input id="sms-consent" type="checkbox" />
             <p>
-              <strong>Optional SMS consent:</strong> I agree to receive appointment reminder and scheduling text
-              messages from the business, provider, or clinic named above using Appointment Air by Othman Kamel.
-              Message frequency varies based on appointment activity. Message and data rates may apply. Reply
-              HELP for help or STOP to opt out.
+              <strong>Optional SMS consent:</strong> I agree to receive SMS follow-ups about an appointment
+              booking or rescheduling request I initiated with the business or service provider named
+              above using Appointment Air LLC. Message frequency varies based on appointment activity.
+              Message and data rates may apply. Reply HELP for help or STOP to opt out.
             </p>
           </div>
 
@@ -485,8 +487,8 @@
 
         <p>
           Read the <a href="privacy.html">Privacy Policy</a> and
-          <a href="terms.html">Terms and Conditions</a> for more information about Appointment Air’s SMS messaging
-          program.
+          <a href="terms.html">Terms and Conditions</a> for more information about SMS opt-in and optional follow-ups related to
+          inbound appointment assistance.
         </p>
       </article>
     </div>
@@ -494,7 +496,7 @@
 
   <footer>
     <div class="container">
-      © 2026 Appointment Air by Othman Kamel ·
+      © 2026 Appointment Air LLC ·
       <a href="index.html">Home</a> ·
       <a href="sms-consent.html">SMS Opt-In</a> ·
       <a href="privacy.html">Privacy Policy</a> ·
@@ -586,11 +588,12 @@
         phone: data.phone,
         email: data.email,
         appointmentTime: data.appointmentTime,
-        submittedAt: now.toISOString(),
-        smsConsentReceived: true,
-        finalEmailConfirmationStatus: 'may be sent soon',
+        recordCreatedAt: now.toISOString(),
+        smsConsentSelected: true,
+        submittedToBusiness: false,
+        finalEmailConfirmationStatus: 'not sent by this page',
         consentLanguage:
-          'I agree to receive appointment reminder and scheduling text messages from the business, provider, or clinic named above using Appointment Air by Othman Kamel. Message frequency varies based on appointment activity. Message and data rates may apply. Reply HELP for help or STOP to opt out.'
+          'I agree to receive SMS follow-ups about an appointment booking or rescheduling request I initiated with the business or service provider named above using Appointment Air LLC. Message frequency varies based on appointment activity. Message and data rates may apply. Reply HELP for help or STOP to opt out.'
       };
     }
 
@@ -635,17 +638,17 @@
 
       const errors = [];
 
-      if (missingBusiness) errors.push('Enter the business, provider, or clinic name.');
+      if (missingBusiness) errors.push('Enter the business or service provider name.');
       if (missingCustomer) errors.push('Enter your name.');
       if (badPhone) errors.push('Enter a valid mobile phone number.');
-      if (badEmail) errors.push('Enter a valid email address for final confirmation.');
-      if (missingAppointment) errors.push('Enter the appointment date and time.');
+      if (badEmail) errors.push('Enter a valid email address.');
+      if (missingAppointment) errors.push('Enter the appointment date and time requested or previously booked.');
 
       if (errors.length > 0) {
         showResult(
           'error',
           '<p class="result-title"><span class="result-icon">!</span>Some information needs to be fixed.</p>' +
-          '<p>Please correct the highlighted fields before submitting SMS opt-in.</p>' +
+          '<p>Please correct the highlighted fields before preparing your local SMS opt-in record.</p>' +
           '<ul>' + errors.map(error => '<li>' + error + '</li>').join('') + '</ul>'
         );
         return;
@@ -654,8 +657,8 @@
       if (!form.consent.checked) {
         showResult(
           'warning',
-          '<p class="result-title"><span class="result-icon">•</span>SMS opt-in was not submitted.</p>' +
-          '<p>You did not check the optional SMS consent box. You should not receive appointment reminder text messages through Appointment Air unless you opt in later or give valid consent through another approved method.</p>'
+          '<p class="result-title"><span class="result-icon">•</span>SMS opt-in was not selected.</p>' +
+          '<p>You did not check the optional SMS opt-in box. No opt-in record was prepared. You can still contact the business directly for appointment assistance.</p>'
         );
         return;
       }
@@ -670,21 +673,21 @@
 
       showResult(
         'success',
-        '<p class="result-title"><span class="result-icon">✓</span>SMS opt-in received.</p>' +
-        '<p>You agreed to receive appointment reminder and scheduling text messages from <strong>' + escapeHtml(businessName) + '</strong> using Appointment Air by Othman Kamel.</p>' +
+        '<p class="result-title"><span class="result-icon">✓</span>Local SMS opt-in record prepared.</p>' +
+        '<p>You selected optional SMS follow-ups for your appointment request with <strong>' + escapeHtml(businessName) + '</strong> using Appointment Air LLC.</p>' +
         '<div class="security-note">' +
-          '<p><strong>For your security, the business may send a final confirmation email to you soon before SMS reminders are enabled.</strong></p>' +
-          '<p>Please check the email address you provided for any follow-up confirmation.</p>' +
+          '<p><strong>This record was prepared only in your browser and was not transmitted to the business or Appointment Air.</strong></p>' +
+          '<p>Contact the business directly to request booking or rescheduling assistance and arrange any actual follow-up.</p>' +
         '</div>' +
         '<div class="confirmation-box">' +
           '<p><strong>Name:</strong> ' + escapeHtml(customerName) + '</p>' +
           '<p><strong>Mobile phone:</strong> ' + escapeHtml(phone) + '</p>' +
           '<p><strong>Confirmation email:</strong> ' + escapeHtml(email) + '</p>' +
           '<p><strong>Appointment:</strong> ' + escapeHtml(formatAppointment(appointmentTime)) + '</p>' +
-          '<p><strong>SMS opt-in:</strong> received</p>' +
+          '<p><strong>SMS opt-in:</strong> selected locally, not submitted</p>' +
         '</div>' +
         '<p>You can reply <strong>STOP</strong> to opt out at any time or <strong>HELP</strong> for help.</p>' +
-        '<p><button class="button secondary" type="button" id="download-consent">Download consent record</button></p>'
+        '<p><button class="button secondary" type="button" id="download-consent">Download local opt-in record</button></p>'
       );
 
       const downloadButton = document.getElementById('download-consent');
