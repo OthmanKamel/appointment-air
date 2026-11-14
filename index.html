@@ -1,561 +1,82 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Appointment Air by Othman Kamel</title>
-  <meta
-    name="description"
-    content="Appointment Air offers empathetic AI responses and human-like voice assistance for inbound appointment setting and rescheduling."
-  />
-
-  <style>
-    :root {
-      --bg: #0b1020;
-      --panel: #11182c;
-      --panel-soft: #172039;
-      --text: #f5f7fb;
-      --muted: #b8c1d9;
-      --line: rgba(255, 255, 255, 0.12);
-      --accent: #72e0ff;
-      --accent-2: #9cf2c6;
-      --white: #ffffff;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(114, 224, 255, 0.18), transparent 32rem),
-        radial-gradient(circle at bottom right, rgba(156, 242, 198, 0.12), transparent 28rem),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    header {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--line);
-      background: rgba(11, 16, 32, 0.72);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-
-    .brand strong {
-      font-size: 18px;
-      letter-spacing: 0.02em;
-    }
-
-    .brand span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      color: var(--muted);
-      font-size: 14px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a:hover {
-      color: var(--white);
-    }
-
-    .hero {
-      padding: 88px 0 64px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 22px;
-    }
-
-    h1 {
-      font-size: clamp(40px, 6vw, 74px);
-      line-height: 0.98;
-      margin: 0 0 22px;
-      letter-spacing: -0.055em;
-    }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 680px;
-      font-size: 18px;
-      margin: 0 0 20px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      padding: 13px 18px;
-      font-weight: 800;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--white);
-    }
-
-    .button.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #06101a;
-      border: none;
-    }
-
-    .button:hover {
-      transform: translateY(-1px);
-    }
-
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 26px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.045));
-      box-shadow: var(--shadow);
-    }
-
-    .demo-phone {
-      background: #07101f;
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      padding: 18px;
-    }
-
-    .message {
-      padding: 14px 16px;
-      border-radius: 18px;
-      margin: 12px 0;
-      background: var(--panel-soft);
-      color: var(--text);
-      font-size: 14px;
-    }
-
-    .message.out {
-      background: rgba(114, 224, 255, 0.13);
-      border: 1px solid rgba(114, 224, 255, 0.2);
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .status-row strong {
-      color: var(--text);
-    }
-
-    section {
-      padding: 56px 0;
-    }
-
-    .section-title {
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.05;
-      margin: 0 0 14px;
-      letter-spacing: -0.035em;
-    }
-
-    .section-intro {
-      color: var(--muted);
-      max-width: 760px;
-      margin: 0 0 28px;
-    }
-
-    #contact .contact-company {
-      color: var(--muted);
-      max-width: 760px;
-      margin: 0 0 24px;
-    }
-
-    #contact .contact-methods {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px 56px;
-    }
-
-    #contact .contact-method {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      min-width: 0;
-    }
-
-    #contact .contact-label {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    #contact .contact-email {
-      color: var(--text);
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-
-    #contact .contact-email:hover {
-      color: var(--accent);
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .feature {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.045);
-      border-radius: 22px;
-      padding: 22px;
-    }
-
-    .feature h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-    }
-
-    .feature p {
-      color: var(--muted);
-      margin: 0;
-      font-size: 15px;
-    }
-
-    .notice {
-      border: 1px solid rgba(156, 242, 198, 0.28);
-      background: rgba(156, 242, 198, 0.09);
-      border-radius: 24px;
-      padding: 22px;
-      color: var(--muted);
-    }
-
-    .cta-panel {
-      border: 1px solid rgba(114, 224, 255, 0.28);
-      background: rgba(114, 224, 255, 0.08);
-      border-radius: 28px;
-      padding: clamp(24px, 5vw, 42px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .cta-panel p {
-      color: var(--muted);
-      max-width: 720px;
-      margin: 0;
-    }
-
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    footer .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    footer a {
-      color: var(--text);
-    }
-
-    @media (max-width: 820px) {
-      .hero-grid,
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .hero {
-        padding-top: 54px;
-      }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#171717" name="theme-color"/>
+<meta content="Appointment Air helps home remodeling companies and moving companies in Sioux Falls and throughout South Dakota welcome inbound calls and website chats, book estimates, organize calendars, and guide customer follow-up." name="description"/>
+<meta content="website" property="og:type"/>
+<meta content="Appointment Air | More booked estimates. Less interruption." property="og:title"/>
+<meta content="Friendly AI voice and chat assistance for home remodeling and moving companies serving Sioux Falls and South Dakota." property="og:description"/>
+<meta content="https://www.appointmentair.com/" property="og:url"/>
+<meta content="https://www.appointmentair.com/assets/hero-poster-v3.webp" property="og:image"/>
+<title>Appointment Air | AI Front Desk for Remodeling &amp; Moving Companies</title>
+<link href="https://www.appointmentair.com/" rel="canonical"/>
+<link href="assets/favicon.png" rel="icon" type="image/png"/>
+<link as="image" fetchpriority="high" href="assets/hero-poster-v3.webp" rel="preload" type="image/webp"/>
+<link href="assets/styles.css?v=hero-layout-3" rel="stylesheet"/>
 </head>
-
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="index.html">
-        <strong>Appointment Air</strong>
-        <span>by Othman Kamel</span>
-      </a>
-
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#how-it-works">How it works</a>
-        <a href="sms-consent.html">Opt in</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Inbound appointment booking and rescheduling automation</div>
-
-          <h1>Turn incoming requests into booked appointments.</h1>
-
-          <p>
-            Appointment Air is an AI-powered appointment-setting and rescheduling service for
-            appointment-based businesses and service providers. Its conversational AI assistant responds to
-            customer-initiated requests with a natural, human-like voice, empathetic guidance, and assistance
-            with booking new appointments, checking availability, and changing existing bookings.
-          </p>
-
-          <p>
-            Every conversation begins with a customer's request. Appointment Air responds with patience and clear guidance
-            to help customers find a suitable time or make a change. A separate SMS opt-in page explains optional
-            appointment follow-ups; that page does not itself book or reschedule appointments.
-          </p>
-
-          <div class="actions">
-            <a class="button primary" href="sms-consent.html">Review appointment opt-in</a>
-            <a class="button" href="#how-it-works">How it works</a>
-            <a class="button" href="privacy.html">Privacy Policy</a>
-          </div>
-        </div>
-
-        <aside class="card" aria-label="Appointment conversation example">
-          <div class="demo-phone">
-            <div class="message out">
-              Appointment Air for Demo Business: Of course, I can help you change your appointment.
-              Thursday at 10:00 AM is available. Would that work for you?
-            </div>
-
-            <div class="message">Yes, please.</div>
-
-            <div class="message out">
-              Appointment Air for Demo Business: You're all set. Your appointment is now Thursday at 10:00 AM.
-              Is there anything else I can help you with?
-            </div>
-
-            <div class="status-row">
-              <span>Status</span>
-              <strong>Rescheduled</strong>
-            </div>
-
-            <div class="status-row">
-              <span>Follow-up needed</span>
-              <strong>No</strong>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="how-it-works">
-      <div class="container">
-        <h2 class="section-title">How Appointment Air works</h2>
-        <p class="section-intro">
-          Appointment Air offers human-like AI voice assistance and empathetic, conversational responses
-          to help customers with booking and rescheduling. It provides clear appointment guidance,
-          not unsolicited sales outreach or marketing campaigns.
-        </p>
-
-        <div class="grid-3">
-          <div class="feature">
-            <h3>1. Customer reaches out</h3>
-            <p>
-              A customer reaches out to request a new appointment or change an existing booking.
-            </p>
-          </div>
-
-          <div class="feature">
-            <h3>2. Appointment Air assists</h3>
-            <p>
-              The AI assistant responds with a human-like voice and helpful guidance, checks available times,
-              and assists with appointment setting and rescheduling.
-            </p>
-          </div>
-
-          <div class="feature">
-            <h3>3. Details and consent are handled</h3>
-            <p>
-              Customers receive clear guidance about their appointment details. Any optional follow-up
-              remains subject to their communication preferences and applicable consent requirements.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="business-subscriptions">
-      <div class="container">
-        <h2 class="section-title">Business subscriptions</h2>
-        <p class="section-intro">
-          Appointment Air provides subscription-based appointment assistance software to businesses.
-          Plans and any prepaid service periods are offered under a written quote or order that explains
-          the included features, service start date, charges, billing currency, renewal terms, and any
-          promotional offer before payment. Pricing is quoted in U.S. dollars (USD) unless stated otherwise.
-        </p>
-        <p class="section-intro">
-          Just one additional successfully booked appointment per month may cover the subscription cost,
-          depending on the value of the appointment. We never charge a setup fee. Three- and six-month
-          prepaid options are available with additional services and customization, detailed in the quote.
-        </p>
-        <p class="section-intro">
-          Service access is provided digitally; no physical products are shipped. For subscription options,
-          onboarding, billing questions, cancellations, or refund requests, contact
-          <a href="mailto:admin.appointmentair@gmail.com">admin.appointmentair@gmail.com</a>.
-          See our <a href="terms.html#subscriptions">subscription and billing terms</a> and
-          <a href="terms.html#cancellations-refunds">cancellation and refund information</a>.
-        </p>
-      </div>
-    </section>
-
-    <section id="consent">
-      <div class="container">
-        <h2 class="section-title">SMS opt-in</h2>
-
-        <div class="notice">
-          <p>
-            For customer-initiated booking or rescheduling requests, a business can direct a customer to the
-            Appointment Air opt-in page to review optional SMS appointment follow-ups.
-          </p>
-
-          <p>
-            The opt-in page asks for the business name, contact details, and appointment information. The SMS
-            checkbox is optional and unchecked by default. The page currently creates a local opt-in record
-            only; it does not transmit details, register a customer, or book an appointment.
-          </p>
-
-          <p>
-            For an active SMS conversation, customers can reply STOP to opt out or HELP for assistance.
-            Message frequency varies with requested appointment follow-up. Message and data rates may apply.
-          </p>
-
-          <p>
-            <a class="button primary" href="sms-consent.html">Go to SMS opt-in page</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="cta-panel">
-          <div>
-            <h2 class="section-title">Need follow-up on an appointment request?</h2>
-            <p>
-              The SMS opt-in page explains optional appointment follow-ups for customers who have already
-              requested help with booking or rescheduling. Contact the business directly to make a request.
-            </p>
-          </div>
-
-          <a class="button primary" href="sms-consent.html">Review appointment opt-in</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <p class="contact-company">
-          Appointment Air is operated by Appointment Air LLC, a Wyoming-registered limited liability company.
-        </p>
-        <div class="contact-methods">
-          <div class="contact-method">
-            <span class="contact-label">General enquiries</span>
-            <a class="contact-email" href="mailto:appointmentair@gmail.com">appointmentair@gmail.com</a>
-          </div>
-          <div class="contact-method">
-            <span class="contact-label">Business enquiries and billing</span>
-            <a class="contact-email" href="mailto:admin.appointmentair@gmail.com">admin.appointmentair@gmail.com</a>
-          </div>
-          <div class="contact-method">
-            <span class="contact-label">Customer support phone</span>
-            <a class="contact-email" href="tel:+13055658562">+1 (305) 565-8562</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-row">
-      <span>© 2026 Appointment Air LLC. All rights reserved.</span>
-      <span>
-        <a href="sms-consent.html">SMS Opt-In</a> ·
-        <a href="privacy.html">Privacy Policy</a> ·
-        <a href="terms.html">Terms and Conditions</a>
-      </span>
-    </div>
-  </footer>
+<header class="site-header">
+<div class="container nav">
+<a aria-label="Appointment Air, home" class="brand" href="index.html"><img alt="Appointment Air" class="brand-logo" height="224" src="assets/appointment-air-logo-light.png" width="1756"/></a>
+<nav aria-label="Main navigation" class="nav-links">
+<a href="#industries">Who we serve</a>
+<a href="#how-it-works">How it works</a>
+<a href="sms-consent.html">SMS opt-in</a>
+<a class="nav-cta" href="tel:+16056674545" aria-label="Call Appointment Air at +1 605 667 4545">Call us</a>
+</nav>
+</div>
+</header>
+<main>
+<section aria-labelledby="hero-title" class="hero">
+<img alt="" class="hero-poster" fetchpriority="high" height="720" src="assets/hero-poster-v3.webp" width="1280"/>
+<video aria-hidden="true" autoplay class="hero-video" data-hero-video loop muted playsinline poster="assets/hero-poster-v3.webp" preload="auto" width="1280" height="720" disablepictureinpicture disableremoteplayback tabindex="-1">
+<source src="assets/appointment-air-hero-v3.mp4" type="video/mp4"/>
+</video>
+<div aria-hidden="true" class="hero-overlay"></div>
+<div class="container hero-content">
+<div class="hero-copy">
+<span class="eyebrow">APPOINTMENT AIR FOR REMODELERS &amp; MOVERS</span>
+<h1 id="hero-title">Unlock all the revenue your <em>business is missing.</em></h1>
+<p>Appointment Air operates as a core system in the businesses. Our AI converts clients over the phone and on your website, from inquiries toward booked estimates, helping you capture more of the business you already attract while your team focuses on the work.</p>
+<div aria-label="Industries served" class="hero-pills"><span>Home remodeling</span><span>Moving companies</span><span>Serving Sioux Falls &amp; South Dakota</span></div>
+<div class="actions"><a class="button primary" href="tel:+16056674545" aria-label="Call +1 605 667 4545 for a demo">Call for a demo <span aria-hidden="true">↗</span></a><a class="button ghost" href="#how-it-works">How it works ↓</a></div>
+<p class="hero-footnote">Built for home remodeling and moving companies. Workflows depend on your configuration, connected tools, and how you choose to operate.</p>
+</div>
+</div>
+</section>
+<div class="trust-strip"><div class="container trust-grid"><span><b>01</b> A welcoming AI voice &amp; chat</span><span><b>02</b> Estimates &amp; site visits, organized</span><span><b>03</b> Thoughtful handoffs &amp; follow-up</span></div></div>
+<section class="section" id="industries">
+<div class="container"><div class="section-head"><span class="kicker">Focused on two service categories</span><h2 class="section-title">Built for two businesses that live on speed, scheduling, and trust.</h2><p class="section-intro">Remodelers and movers both win or lose business in the first conversation. Customers want clarity, fast responses, and an easy next step. Your team needs those inquiries organized without disrupting the work already in front of them.</p></div>
+<div class="industry-grid focus-grid">
+<article class="industry-card focus-card remodel-card"><div aria-hidden="true" class="focus-card-icon">⌂</div><span class="focus-type">01 / THE PROJECT</span><h3>Home remodeling companies</h3><p>Welcome homeowners asking about kitchen, bathroom, and whole-home remodeling. Capture project scope and preferred timing, help arrange consultations or site visits, and make sure your estimator gets a clear handoff.</p><div class="usecase"><span>Example inquiry</span><strong>“Could someone come look at our kitchen next week?”</strong></div><ul><li>Remodeling estimate requests</li><li>Consultations &amp; site visits</li><li>Project details routed to your team</li></ul></article>
+<article class="industry-card focus-card move-card"><div aria-hidden="true" class="focus-card-icon">↗</div><span class="focus-type">02 / THE NEXT CHAPTER</span><h3>Moving companies</h3><p>Welcome customers planning a local or long-distance residential move. Gather dates, addresses and move details, help arrange estimates or callbacks, and direct requests to the right person.</p><div class="usecase"><span>Example inquiry</span><strong>“We're moving at the end of the month. Can I get a quote?”</strong></div><ul><li>Moving quote inquiries</li><li>In-home or virtual estimate scheduling</li><li>Updates &amp; dispatch handoffs</li></ul></article>
+</div></div>
+</section>
+<section class="section soft" id="how-it-works">
+<div class="container"><div class="section-head"><span class="kicker">A simple service-business flow</span><h2 class="section-title">Faster responses. Cleaner handoffs. Fewer missed opportunities.</h2><p class="section-intro">From a first call or website inquiry to a booked estimate and a well-prepared crew, your workflow stays connected. After the job, an optional review invitation closes the loop.</p></div>
+<div class="workflow">
+<article class="step"><span class="number">STEP 01</span><h3>They call or chat</h3><p>A homeowner starts a voice conversation or opens the business's website chat to ask for help.</p></article>
+<article class="step"><span class="number">STEP 02</span><h3>AI welcomes them</h3><p>The assistant answers with warmth, asks relevant questions, and captures project or move details.</p></article>
+<article class="step"><span class="number">STEP 03</span><h3>Time gets booked</h3><p>A connected calendar helps find available consultation, estimate, or walkthrough times.</p></article>
+<article class="step"><span class="number">STEP 04</span><h3>Your crew stays in sync</h3><p>Details go to the right estimator, coordinator, or team member for a smooth handoff.</p></article>
+<article class="step"><span class="number">STEP 05</span><h3>The follow-up happens</h3><p>After service, an appropriately configured workflow can send a neutral review invitation—customers choose their rating.</p></article>
+</div></div>
+</section>
+<section class="section">
+<div class="container split"><div><span class="kicker">Real attention for every new project</span><h2 class="section-title">Stay focused on the work. Keep the front desk moving.</h2><p class="section-intro">A remodeler in the middle of an installation and a moving crew loading a truck have the same problem: the next customer calls when their hands are full. Appointment Air helps keep that first conversation from getting lost.</p><ul class="benefit-list"><li>Natural responses to customer-initiated calls and website chats</li><li>Clear collection of project scope, dates, and customer details</li><li>Estimate booking and rescheduling with configured calendars</li><li>Handoffs to an estimator, coordinator, or human team member</li><li>Optional, consent-aware appointment and post-job follow-up</li></ul></div>
+<div aria-label="Illustrative dashboard showing a kitchen remodel consultation booked, a moving estimate booked, project notes assigned to an estimator, and a review invitation after service" class="benefit-board" role="img"><div class="board-top"><span>ONE PLACE FOR THE NEXT STEP</span><span class="live">● Workflow illustration</span></div><div class="board-row"><span class="board-icon">⌂</span><div><strong>Kitchen remodel consultation</strong><small>Estimate visit • Tuesday, 10:30 AM</small></div><span class="board-pill">Booked</span></div><div class="board-row"><span class="board-icon">↗</span><div><strong>Moving estimate</strong><small>Walkthrough • Wednesday, 2:00 PM</small></div><span class="board-pill">Booked</span></div><div class="board-row"><span class="board-icon">✓</span><div><strong>Remodel project notes</strong><small>Scope and address sent to estimator</small></div><span class="board-pill">Routed</span></div><div class="board-row"><span class="board-icon">★</span><div><strong>Completed service</strong><small>Optional review link sent to customer</small></div><span class="board-pill">Follow-up</span></div></div>
+</div>
+</section>
+<section class="section soft" id="south-dakota"><div class="container locale-panel"><div><span class="kicker">Rooted in the needs of local service businesses</span><h3>Built for Sioux Falls pace. Ready for South Dakota communities.</h3><p>Whether someone is planning a kitchen remodel in Sioux Falls or scheduling a residential move elsewhere in South Dakota, speed and organization matter. Appointment Air is designed to help service businesses stay responsive without claiming a physical South Dakota office.</p></div><span class="locale-chip">SIOUX FALLS · SOUTH DAKOTA</span></div></section>
+<section class="section" id="business-subscriptions"><div class="container"><div class="section-head"><span class="kicker">Simple to understand, practical to run</span><h2 class="section-title">Practical service. Clear terms.</h2></div><div class="plan-panel"><div><p>Appointment Air provides subscription-based AI appointment assistance software. We'll outline your included services, onboarding, connected systems, billing terms, and any prepaid option in a written quote or checkout offer before you pay.</p><p>One additional booked job may be enough to justify the subscription for some service businesses, depending on the job's value. There is <strong>no setup fee</strong>. Three- and six-month prepaid options may include additional services and customization under the accepted offer.</p><p>Service is delivered digitally. For subscriptions, billing, cancellations, and refunds, contact <a href="mailto:admin.appointmentair@gmail.com">admin.appointmentair@gmail.com</a> and see our <a href="terms.html#subscriptions">subscription terms</a> and <a href="terms.html#cancellations-refunds">refund information</a>.</p></div><aside class="plan-side"><strong>See the workflow for your trade</strong>Tell us your team size, service area, and how inquiries currently become booked estimates. We’ll discuss the setup that fits.<div style="margin-top:18px"><a class="button dark" href="tel:+16056674545" aria-label="Call +1 605 667 4545 for a demo">Call for a demo ↗</a></div></aside></div></div></section>
+<section class="section soft" id="consent"><div class="container"><div class="section-head"><span class="kicker">Clear choices for your customers</span><h2 class="section-title">SMS opt-in, handled clearly.</h2></div><div class="notice"><p>For customer-initiated booking or rescheduling requests, a business can direct customers to the separate <a href="sms-consent.html">SMS opt-in page</a> to review optional appointment follow-ups. This is not an unsolicited marketing program.</p><p>The form has an optional, unchecked SMS opt-in checkbox. It currently prepares a record locally in the customer's browser only; it does <strong>not</strong> transmit details, register the customer, book an appointment, or activate follow-ups.</p><p>For an active SMS conversation, recipients can reply STOP to opt out or HELP for assistance. Message frequency varies; message and data rates may apply.</p><a class="button dark" href="sms-consent.html">Review SMS opt-in</a></div></div></section>
+<section class="section"><div class="container"><div class="cta-band"><div><h2>More good projects start with a good conversation.</h2><p>Tell us how your remodeling or moving business handles calls, estimates, and scheduling today. We’ll show how an AI front desk could fit your workflow.</p></div><a class="button primary" href="tel:+16056674545" aria-label="Call Appointment Air at +1 605 667 4545">Call us ↗</a></div></div></section>
+<section class="section soft" id="contact"><div class="container"><span class="kicker">Let's connect</span><h2 class="section-title">Contact Appointment Air.</h2><p class="section-intro">Appointment Air is operated by Appointment Air LLC, a Wyoming-registered limited liability company. We support moving and home remodeling companies in South Dakota and beyond.</p><div class="contact-grid"><div class="contact-card"><small>General inquiries</small><a href="mailto:appointmentair@gmail.com">appointmentair@gmail.com</a></div><div class="contact-card"><small>Business inquiries &amp; billing · Paul Kemal</small><a href="mailto:admin.appointmentair@gmail.com">admin.appointmentair@gmail.com</a></div><div class="contact-card"><small>Call us directly</small><a href="tel:+16056674545">+1 (605) 667-4545</a></div></div></div></section>
+</main>
+<footer class="footer"><div class="container footer-inner"><div class="footer-brand"><img alt="Appointment Air" class="footer-logo" src="assets/appointment-air-logo-light.png"/><span>© 2026 Appointment Air LLC. All rights reserved.</span></div><nav aria-label="Footer"><a href="index.html">Home</a><a href="sms-consent.html">SMS Opt-In</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></nav></div></footer>
+<script defer="" src="assets/site.js?v=hero-layout-5"></script>
 </body>
 </html>
